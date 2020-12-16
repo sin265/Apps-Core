@@ -69,6 +69,7 @@
           - '/mnt:/mnt'
           - '/opt/appdata/{{pgrole}}:/config'
           - '/opt/appdata/{{pgrole}}/sock:/run/php'
+          - '/torrents:/torrents'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -129,14 +130,14 @@
       lineinfile:
         path: '/opt/appdata/{{pgrole}}/rtorrent/rtorrent.rc'
         regexp: '#*directory\s*=.*'
-        line: 'directory = {{path.stdout}}/downloads/{{pgrole}}'
+        line: 'directory = /torrents'
         state: present
 
     - name: Set download location
       lineinfile:
         path: '/opt/appdata/{{pgrole}}/rtorrent/rtorrent.rc'
         regexp: '#*directory.default.set\s*=.*'
-        line: 'directory.default.set = {{path.stdout}}/downloads/{{pgrole}}'
+        line: 'directory.default.set = /torrents'
         state: present
 
     # - name: Set download completed move location
