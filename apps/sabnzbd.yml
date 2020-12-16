@@ -66,6 +66,7 @@
           - '{{path.stdout}}:{{path.stdout}}'
           - '/mnt:/mnt'
           - '/opt/appdata/{{pgrole}}:/config'
+          - '/download:/download'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -117,7 +118,7 @@
         path: '/opt/appdata/{{pgrole}}/sabnzbd.ini'
         section: misc
         option: complete_dir
-        value: '{{path.stdout}}/downloads/{{pgrole}}'
+        value: '/download'
         state: present
 
     - name: Set nzb watch location
@@ -224,7 +225,7 @@
             path: '/opt/appdata/{{pgrole}}/sabnzbd.ini'
             section: misc
             option: download_free
-            value: 25G
+            value: 10G
             state: present
       when: not inicheck.stat.exists
 
