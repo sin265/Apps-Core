@@ -78,7 +78,7 @@
           - '/tmp:/tmp'
           - '/opt/transcodes:/transcode'
           - '/dev/shm:/ram_transcode'
-          - '/media:media'
+          - '/media:/media'
 
     - name: 'Establish Key Variables'
       set_fact:
